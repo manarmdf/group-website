@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Board</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Vision Board</h1>
+    <div class="gallery">
+        <% frames.forEach(frame => { %>
+            <div class="frame <%= frame.size %>" onclick="uploadImage(this)"></div>
+        <% }) %>
+    </div>
+    
+    <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)" style="display: none;">
+    
+    <script>
+        let currentFrame;
+        function uploadImage(frame) {
+            currentFrame = frame;
+            document.getElementById('fileInput').click();
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentFrame.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`; // ✅ Fixed
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
