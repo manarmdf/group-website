@@ -12,25 +12,18 @@
             <div class="frame <%= frame.size %>" onclick="uploadImage(this)"></div>
         <% }) %>
     </div>
-    
-    <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)" style="display: none;">
-    
+
+    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="image" id="fileInput" accept="image/*" onchange="uploadFile(event)">
+    </form>
+
     <script>
-        let currentFrame;
         function uploadImage(frame) {
-            currentFrame = frame;
             document.getElementById('fileInput').click();
         }
 
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentFrame.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`; // ✅ Fixed
-                };
-                reader.readAsDataURL(file);
-            }
+        function uploadFile(event) {
+            document.getElementById("uploadForm").submit();
         }
     </script>
 </body>
