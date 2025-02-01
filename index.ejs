@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Board</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            margin: 0 auto;
+            width: 100%;
+            height: calc(100vh - 100px);
+            max-width: 1200px;
+        }
+
+        .frame {
+            background-color: #e0e0e0;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e3982;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .frame:hover {
+            transform: scale(1.05);
+            background-color: #d6d6d6;
+        }
+
+        .frame .options {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .frame:hover .options {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Vision Board</h1></center>
+
+    <div class="gallery">
+        <% for (let i = 0; i < 9; i++) { %>
+            <div class="frame" id="frame-<%= i %>" onclick="uploadImage(<%= i %>)">
+                <% if (images && images[i]) { %>
+                    <img src="/uploads/<%= images[i] %>" id="img-<%= i %>" alt="Uploaded Image">
+                    <div class="options">
+                        <button onclick="event.stopPropagation(); deleteImage(<%= i %>)">حذف</button>
+                    </div>
+                <% } else { %>
+                    <span id="text-<%= i %>" , style="color: #5b4e77;">إضافة صورة</span>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+
+    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="image" id="fileInput" accept="image/*" onchange="uploadFile(event)">
+        <input type="hidden" name="index" id="imageIndex">
+    </form>
+
+    <script>
+        function uploadImage(index) {
+            document.getElementById('imageIndex').value = index;
+            document.getElementById('fileInput').click();
+        }
+
+        function uploadFile(event) {
+            document.getElementById("uploadForm").submit();
+        }
+
+        function changeImage(index) {
+            document.getElementById('imageIndex').value = index;
+            document.getElementById('fileInput').click();
+        }
+
+        function deleteImage(index) {
+            if (confirm("هل أنت متأكد من حذف هذه الصورة؟")) {
+                fetch(`/delete-image/${index}`, { method: 'DELETE' })
+                    .then(() => {
+                        const frame = document.getElementById(`frame-${index}`);
+                        frame.innerHTML = '<span id="text-'+index+'">إضافة صورة</span>';
+                    })
+                    .catch(err => console.error("خطأ في الحذف:", err));
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

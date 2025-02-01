@@ -1,0 +1,174 @@
+/* إعدادات عامة */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3ebf5;
+}
+
+/* عنوان الصفحة */
+h1 {
+    margin-bottom: 20px;
+    color: #5b4e77;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 55px;
+}
+
+/* تخطيط الكاردات */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* تصميم الكارد */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 300px; /* ارتفاع ثابت */
+    overflow-y: auto; /* إضافة شريط تمرير */
+    color: #5b4e77;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    scrollbar-width: thin; /* عرض شريط التمرير */
+    scrollbar-color: #ccc #f8f8f8; /* ألوان شريط التمرير */
+}
+
+/* شريط التمرير داخل الكارد */
+.card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+}
+
+/* ألوان الأشهر */
+.january { background-color: #E3E6FA; }
+.february { background-color: #FFF3BF; }
+.march { background-color: #FFD6E0; }
+.april { background-color: #E3E6FA; }
+.may { background-color: #FFF3BF; }
+.june { background-color: #FFD6E0; }
+
+/* المهام */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+
+/* الأيقونات */
+.list-group-item .btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+/* مربع تعديل المهمة */
+.list-group-item input[name="newTitle"] {
+    width: 50px; /* تصغير عرض مربع التعديل */
+    padding: 5px;
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* الأزرار */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button i {
+    font-size: 1.2em;
+    color: #333;
+}
+
+button .text-danger {
+    color: red;
+}
+
+/* زر "Add Task" */
+.add-task input {
+    width: 300px; /* تكبير عرض مربع الإضافة */
+    padding: 12px; /* زيادة المساحة الداخلية */
+    font-size: 1.3em; /* تكبير النص */
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-task button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* زيادة حجم زر الإضافة */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ======= تنسيقات صفحة Vision Board ======= */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.frame {
+    background-color: #e0e0e0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2e3982;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.frame:hover {
+    transform: scale(1.05);
+    background-color: #d6d6d6;
+}
+
+.frame.large {
+    width: 200px;
+    height: 200px;
+}
+
+.frame.medium {
+    width: 175px;
+    height: 175px;
+}
+
+.frame.small {
+    width: 150px;
+    height: 150px;
+}
+
+
+
+
+
+
