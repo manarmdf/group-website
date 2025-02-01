@@ -1,3 +1,5 @@
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const multer = require("multer");
@@ -6,11 +8,10 @@ const fs = require("fs");
 
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/visionBoardDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect("mongodb://127.0.0.1:27017/visionBoardDB")
+    .then(() => console.log("✅ Connected to MongoDB"))
+    .catch(err => console.error("❌ MongoDB connection error:", err));
+
 
 // Define Schema
 const imageSchema = new mongoose.Schema({
@@ -40,12 +41,22 @@ const upload = multer({ storage: storage });
 app.get("/", async (req, res) => {
     try {
         const images = await Image.find();
-        res.render("index", { images });
+        
+        // Define a static frames array
+        const frames = [
+            { size: "large" },
+            { size: "medium" },
+            { size: "small" },
+            { size: "large" }
+        ];
+
+        res.render("index", { images, frames }); // ✅ Pass frames to EJS
     } catch (err) {
         console.error(err);
         res.status(500).send("Error fetching images");
     }
 });
+
 
 // Upload Image Route
 app.post("/upload", upload.single("image"), async (req, res) => {
