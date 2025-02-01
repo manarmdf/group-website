@@ -32,7 +32,7 @@ const upload = multer({ storage: storage });
 // بيانات المهام لكل شهر
 let tasksByMonth = {
     "January": [], "February": [], "March": [], "April": [], "May": [], "June": [],
-    "July": [], "August": [], "September": [], "October": [], "November": [], "December": []
+
 };
 
 // الصفحة الرئيسية
